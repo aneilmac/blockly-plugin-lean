@@ -10,7 +10,9 @@
 
 import * as Blockly from 'blockly';
 import {toolboxSimple, createPlayground} from '@blockly/dev-tools';
-import {BlocklyPluginLean, LeanToolBoxCategories} from '../src/index';
+import {defineLean, LeanToolBoxCategories} from '../src/index';
+
+defineLean(Blockly);
 
 /**
  * Create a workspace.
@@ -33,9 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const defaultOptions = {
     toolbox: toolboxSimple,
   };
-  
+
   createPlayground(document.getElementById('root'), createWorkspace,
       defaultOptions).then((playground) => {
-        playground.addGenerator('Lean', Blockly.Lean);
-      });
+    playground.addGenerator('Lean', Blockly.Lean);
+  });
 });

@@ -1,4 +1,4 @@
-# blockly-plugin-blockly-lean-plugin [![Built on Blockly](https://tinyurl.com/built-on-blockly)](https://github.com/google/blockly)
+# @aneilmac/blockly-plugin-lean [![Built on Blockly](https://tinyurl.com/built-on-blockly)](https://github.com/google/blockly)
 
 <!--
   - TODO: Edit plugin description.
@@ -9,38 +9,34 @@ A [Blockly](https://www.npmjs.com/package/blockly) plugin that ...
 
 ### Yarn
 ```
-yarn add blockly-plugin-blockly-lean-plugin
+yarn add @aneilmac/blockly-plugin-lean
 ```
 
 ### npm
 ```
-npm install blockly-plugin-blockly-lean-plugin --save
+npm install @aneilmac/blockly-plugin-lean --save
 ```
 
 ## Usage
 
-<!--
-  - TODO: Update usage.
-  -->
 ```js
 import * as Blockly from 'blockly';
-import {Plugin} from 'blockly-plugin-blockly-lean-plugin';
+import {defineLean, LeanToolBoxCategories} from '@aneilmac/blockly-plugin-lean';
 
-// Inject Blockly.
+// Inject Lean blocks and generator.
+defineLean(Blockly);
+
+// Use the default Lean toolbox.
 const workspace = Blockly.inject('blocklyDiv', {
-  toolbox: toolboxCategories,
+  toolbox: LeanToolBoxCategories,
 });
-
-// Initialize plugin.
-const plugin = new Plugin(workspace);
-plugin.init();
 ```
 
 ## API
 
-<!--
-  - TODO: describe the API.
-  -->
+### Generator
+
+### Lean Blocks
 
 ## License
 Apache 2.0

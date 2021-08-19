@@ -12,52 +12,55 @@ import defineGenerator from './generator';
  * @fileoverview Blockly Plugin for Lean.
  */
 
-/**
- * Plugin description.
- */
-export class BlocklyPluginLean {
-  /**
-   * Constructor for ...
-   * @param {!Blockly.WorkspaceSvg} workspace The workspace that the plugin will
-   *     be added to.
-   */
-  constructor(workspace) {
-    /**
-     * The workspace.
-     * @type {!Blockly.WorkspaceSvg}
-     * @protected
-     */
-    this.workspace_ = workspace;
-  }
-
-  /**
-   * Initialize.
-   */
-  init() {
-    defineBlocks();
-    defineGenerator();
-  }
+export function defineLean(Blockly) {
+  defineBlocks(Blockly);
+  defineGenerator(Blockly);
 }
 
-export const LeanTacticsCategories = {
-  "kind": "category",
-  "name": "Tactics",
-  "contents": [
+export const LeanTacticsCategory = {
+  'kind': 'category',
+  'name': 'Tactics',
+  'contents': [
     {
-      "kind": "block",
-      "type": "tactic_refl"
+      'kind': 'block',
+      'type': 'tactic_refl',
     },
     {
-      "kind": "block",
-      "type": "tactic_sorry"
-    }
-  ]
+      'kind': 'block',
+      'type': 'tactic_rw',
+    },
+    {
+      'kind': 'block',
+      'type': 'tactic_rw_at',
+    },
+    {
+      'kind': 'block',
+      'type': 'tactic_induction',
+    },
+    {
+      'kind': 'block',
+      'type': 'tactic_sorry',
+    },
+  ],
 };
 
+export const LeanValueCategory = {
+  'kind': 'category',
+  'name': 'Values',
+  'contents': [
+    {
+      'kind': 'block',
+      'type': 'text',
+    },
+  ],
+};
+
+
 export const LeanToolBoxCategories = {
-  "kind": "categoryToolbox",
-  "name": "Core",
-  "contents": [
-    LeanTacticsCategories
-  ]
+  'kind': 'categoryToolbox',
+  'name': 'Core',
+  'contents': [
+    LeanTacticsCategory,
+    LeanValueCategory,
+  ],
 };
