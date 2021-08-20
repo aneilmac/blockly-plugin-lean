@@ -2,7 +2,6 @@
  *
  */
 export default function defineLogic(Blockly) {
-  console.log(Blockly);
   Blockly.Lean['tactic_sorry'] = function(_block) {
     return 'sorry';
   };

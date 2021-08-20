@@ -60,14 +60,21 @@ export default function defineLean(Blockly) {
    * @protected
    */
   Blockly.Lean.scrub_ = function(block, code, optThisOnly) {
+    if (optThisOnly) {
+      return code;
+    }
+
+    // Always end in comma even if there is no next code block.
+    code += ',';
+
     const nextBlock =
         block.nextConnection && block.nextConnection.targetBlock();
-    let nextCode = '';
+
     if (nextBlock) {
-      nextCode =
-      optThisOnly ? '' : ',\n' + Blockly.Lean.blockToCode(nextBlock);
+      code += '\n' + Blockly.Lean.blockToCode(nextBlock);
     }
-    return code + nextCode;
+
+    return code;
   };
 
   /**

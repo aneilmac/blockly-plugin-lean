@@ -23,11 +23,6 @@ defineLean(Blockly);
 function createWorkspace(blocklyDiv, options) {
   options.toolbox = LeanToolBoxCategories;
   const workspace = Blockly.inject(blocklyDiv, options);
-  const plugin = new BlocklyPluginLean(workspace);
-  plugin.init();
-
-  console.log(options.toolbox);
-
   return workspace;
 }
 

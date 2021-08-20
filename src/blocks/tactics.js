@@ -2,7 +2,6 @@
  *
  */
 export default function defineTactics(Blockly) {
-  console.log('defining tactics');
   Blockly.defineBlocksWithJsonArray([
     {
       'type': 'tactic_refl',
