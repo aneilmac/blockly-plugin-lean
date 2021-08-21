@@ -4,7 +4,7 @@
   "description": "A Blockly plugin.",
   "scripts": {
     "audit:fix": "blockly-scripts auditFix",
-    "build": "blockly-scripts build",
+    "build": "npx -p typescript tsc && blockly-scripts build",
     "clean": "blockly-scripts clean",
     "lint": "blockly-scripts lint",
     "predeploy": "blockly-scripts predeploy",
@@ -13,7 +13,8 @@
     "test": "blockly-scripts test"
   },
   "main": "./dist/index.js",
-  "module": "./src/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./src/index.ts",
   "unpkg": "./dist/index.js",
   "author": "Archibald Neil MacDonald",
   "keywords": [
@@ -46,7 +47,18 @@
   },
   "publishConfig": {},
   "eslintConfig": {
-    "extends": "@blockly/eslint-config"
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "plugins": ["@typescript-eslint"],
+    "extends": [
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@typescript-eslint/parser"
+    },
+    "rules": {}
   },
   "engines": {
     "node": ">=8.17.0"

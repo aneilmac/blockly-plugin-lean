@@ -1,7 +1,8 @@
+import * as _Blockly from 'blockly';
 /**
- *
+ * @param Blockly
  */
-export default function defineTactics(Blockly) {
+export default function defineTactics(Blockly: typeof _Blockly) {
   Blockly.defineBlocksWithJsonArray([
     {
       'type': 'tactic_refl',
