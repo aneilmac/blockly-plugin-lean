@@ -14,7 +14,6 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "module": "./src/index.ts",
   "unpkg": "./dist/index.js",
   "author": "Archibald Neil MacDonald",
   "keywords": [

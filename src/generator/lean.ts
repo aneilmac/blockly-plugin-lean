@@ -8,7 +8,7 @@ import defineText from './lean/text';
  */
 export class LeanGenerator extends Blockly.Generator {
   ORDER_ATOMIC = 0;
-
+  ORDER_NONE = 99;
   /**
    *
    */
@@ -50,9 +50,8 @@ export const Generator = new LeanGenerator;
  * prevent users from accidentally clobbering a built-in object or function.
  * @private
  */
-Generator.addReservedWords(
-    'theorem,lemma,axiom,axioms,variable,protected,private,' +
-  'def,meta,mutual,example,noncomputable,' +
+Generator.addReservedWords('theorem,lemma,axiom,axioms,variable,protected,' +
+  'private,def,meta,mutual,example,noncomputable,' +
   'variables,parameter,parameters,constant,constants,' +
   'using_well_founded,' +
   'end,namespace,section,prelude,' +
@@ -83,21 +82,9 @@ Generator.addReservedWords(
  * @protected
  */
 Generator.scrub_ = function(block, code, optThisOnly) {
-  if (optThisOnly) {
-    return code;
-  }
-
-  // Always end in comma even if there is no next code block.
-  code += ',';
-
-  const nextBlock =
-      block.nextConnection && block.nextConnection.targetBlock();
-
-  if (nextBlock) {
-    code += '\n' + Generator.blockToCode(nextBlock);
-  }
-
-  return code;
+  const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  const nextCode = optThisOnly ? '' : this.blockToCode(nextBlock);
+  return code + nextCode;
 };
 
 defineLogic(Generator);

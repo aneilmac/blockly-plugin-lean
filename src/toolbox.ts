@@ -8,6 +8,10 @@ export const LeanTacticsCategory = {
   contents: [
     {
       kind: 'block',
+      type: 'lemma',
+    },
+    {
+      kind: 'block',
       type: 'tactic_refl',
     },
     {
@@ -35,7 +39,7 @@ export const LeanValueCategory = {
   contents: [
     {
       kind: 'block',
-      type: 'text',
+      type: 'prop',
     },
   ],
 };
