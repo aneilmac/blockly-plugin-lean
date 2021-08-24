@@ -13,7 +13,12 @@ export default function defineLogic(Generator: any) {
     code += text_theorem_name + ' ' + text_theorem_statement;
     code += ' := \n';
 
-    code += 'begin\n';
+    code += 'begin';
+    if (block.data) {
+      code += ` [${block.data}]`;
+    }
+    code += '\n';
+
     code += Generator.statementToCode(block, 'LEMMA_PROOF');
     code += 'end';
     return code;
@@ -68,7 +73,10 @@ export default function defineLogic(Generator: any) {
     return code + ',\n';
   };
   Generator['prop'] = function(block: Blockly.Block) {
-    const code = block.getFieldValue('PROP_NAME');
-    return [code, Generator.ORDER_ATOMIC];
+    if (block.data) {
+      return [block.data, Generator.ORDER_ATOMIC];
+    } else {
+      return [block.getFieldValue('PROP_NAME'), Generator.ORDER_ATOMIC];
+    }
   };
 }
