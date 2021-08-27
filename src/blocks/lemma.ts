@@ -36,7 +36,7 @@ export default function defineLemma(Blockly: typeof _Blockly) {
           },
         ],
         'inputsInline': false,
-        'colour': 260,
+        'style': 'procedure_blocks',
         'tooltip': '',
         'helpUrl': '',
       });

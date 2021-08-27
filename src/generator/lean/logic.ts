@@ -65,18 +65,17 @@ export default function defineLogic(Generator: any) {
     code += Generator.valueToCode(block, 'EXPR',
         Generator.ORDER_ATOMIC);
 
-    code += ' with ';
-
-    code += Generator.valueToCode(block, 'WITH_IDS',
-        Generator.ORDER_ATOMIC);
-
     return code + ',\n';
   };
-  Generator['prop'] = function(block: Blockly.Block) {
+
+  const prop_fn = function(block: Blockly.Block) {
     if (block.data) {
       return [block.data, Generator.ORDER_ATOMIC];
     } else {
       return [block.getFieldValue('PROP_NAME'), Generator.ORDER_ATOMIC];
     }
   };
+
+  Generator['prop'] = prop_fn;
+  Generator['prop_dynamic'] = prop_fn;
 }

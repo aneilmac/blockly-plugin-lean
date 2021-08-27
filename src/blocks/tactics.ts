@@ -3,27 +3,15 @@ import * as _Blockly from 'blockly';
  * @param Blockly
  */
 export default function defineTactics(Blockly: typeof _Blockly) {
-  Blockly.Blocks['tactic_begin'] = {
-    init: function() {
-      this.jsonInit({
-        'type': 'tactic_begin',
-        'message0': 'begin',
-        'nextStatement': 'tactic',
-        'colour': 330,
-      });
-      this.isDeletable = () => false;
-    },
-  } as _Blockly.Block;
-
   Blockly.defineBlocksWithJsonArray([
     {
       'type': 'tactic_refl',
       'message0': 'reflexivity',
       'previousStatement': 'tactic',
       'nextStatement': 'tactic',
-      'colour': 230,
       'tooltip': 'refl proves goals of the form X = X.',
       'helpUrl': 'refl',
+      'style': 'logic_blocks',
     },
     {
       'type': 'tactic_rw',
@@ -53,7 +41,7 @@ export default function defineTactics(Blockly: typeof _Blockly) {
       'inputsInline': false,
       'previousStatement': 'tactic',
       'nextStatement': 'tactic',
-      'colour': 230,
+      'style': 'logic_blocks',
       'tooltip': 'rw',
       'helpUrl': 'rw',
     },
@@ -75,7 +63,7 @@ export default function defineTactics(Blockly: typeof _Blockly) {
         },
       ],
       'inputsInline': false,
-      'colour': 230,
+      'style': 'logic_blocks',
       'tooltip': 'rw_at',
       'helpUrl': 'rw_at',
     },
@@ -89,21 +77,17 @@ export default function defineTactics(Blockly: typeof _Blockly) {
     },
     {
       'type': 'tactic_induction',
-      'message0': 'induction %1 with %2',
+      'message0': 'induction %1',
       'args0': [
         {
           'type': 'input_value',
           'name': 'EXPR',
         },
-        {
-          'type': 'input_value',
-          'name': 'WITH_IDS',
-        },
       ],
       'inputsInline': false,
       'previousStatement': 'tactic',
       'nextStatement': 'tactic',
-      'colour': 230,
+      'style': 'logic_blocks',
       'tooltip': '',
       'helpUrl': '',
     },
