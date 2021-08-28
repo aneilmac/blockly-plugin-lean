@@ -6,6 +6,27 @@ import * as _Blockly from 'blockly';
 export default function defineProposition(Blockly: typeof _Blockly) {
   Blockly.defineBlocksWithJsonArray([
     {
+      'type': 'prop_declaration',
+      'message0': '%1 : %2',
+      'args0': [
+        {
+          'type': 'field_input',
+          'name': 'VARIABLE_DECL',
+          'text': 'default',
+        },
+        {
+          'type': 'field_input',
+          'name': 'VARIABLE_DEF',
+          'text': 'default',
+        },
+      ],
+      'previousStatement': 'prop_declaration',
+      'nextStatement': 'prop_declaration',
+      'style': 'variable_blocks',
+      'tooltip': '',
+      'helpUrl': '',
+    },
+    {
       'type': 'prop',
       'message0': '%1',
       'args0': [

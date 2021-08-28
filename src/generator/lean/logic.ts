@@ -1,10 +1,32 @@
 import * as Blockly from 'blockly';
-import {LeanGenerator} from '../lean';
+
+export interface LemmaOverride {
+  generatedLemma: string;
+}
+
+export interface TacticOverride {
+  generatedTactic: string;
+}
+
+export interface PropositionOverride {
+  generatedProposition: string;
+}
 
 /**
  * @param Generator
  */
 export default function defineLogic(Generator: any) {
+  Generator['variables'] = function(block: Blockly.Block) {
+    let code = 'variables\n';
+    code += Generator.statementToCode(block, 'VARIABLES');
+    code += '\n';
+    return code;
+  };
+  Generator['prop_declaration'] = function(block: Blockly.Block) {
+    const decl = block.getFieldValue('VARIABLE_DECL');
+    const def = block.getFieldValue('VARIABLE_DEF');
+    return `(${decl} : ${def})\n`;
+  };
   Generator['lemma'] = function(block: Blockly.Block) {
     let code = 'lemma ';
 
@@ -20,7 +42,7 @@ export default function defineLogic(Generator: any) {
     code += '\n';
 
     code += Generator.statementToCode(block, 'LEMMA_PROOF');
-    code += 'end';
+    code += 'end\n';
     return code;
   };
   Generator['tactic_begin'] = function() {
