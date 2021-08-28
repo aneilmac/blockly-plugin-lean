@@ -32,7 +32,7 @@ export default function defineLogic(Generator: any) {
 
     const text_theorem_name = block.getFieldValue('THEOREM_NAME');
     const text_theorem_statement = block.getFieldValue('THEOREM_DECLARATION');
-    code += text_theorem_name + ' ' + text_theorem_statement;
+    code += text_theorem_name + ' : ' + text_theorem_statement;
     code += ' := \n';
 
     code += 'begin';

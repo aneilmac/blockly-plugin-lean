@@ -39,19 +39,20 @@ export class LeanGenerator extends Blockly.Generator {
   /**
    * @param block
    * @param code
+   * @return The code
    */
   generate_include_omit_(block: Blockly.Block, code: string): string {
     const statement_names: string[] = [];
     let statement_block = block.getInputTargetBlock('VARIABLES');
     while (statement_block) {
       statement_names.push(statement_block.getFieldValue('VARIABLE_DECL'));
-      const next_conn = statement_block.nextConnection;
-      statement_block = next_conn && next_conn.targetBlock();
+      statement_block = statement_block.getNextBlock();
     }
 
     const includes = statement_names.join(' ');
 
-    const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+    const nextBlock = block.nextConnection &&
+                      block.nextConnection.targetBlock();
     const nextCode = this.blockToCode(nextBlock);
 
     code += `include ${includes}\n${nextCode}omit ${includes}\n`;
