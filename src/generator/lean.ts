@@ -35,29 +35,6 @@ export class LeanGenerator extends Blockly.Generator {
     }
     return quote + string + quote;
   }
-
-  /**
-   * @param block
-   * @param code
-   * @return The code
-   */
-  generate_include_omit_(block: Blockly.Block, code: string): string {
-    const statement_names: string[] = [];
-    let statement_block = block.getInputTargetBlock('VARIABLES');
-    while (statement_block) {
-      statement_names.push(statement_block.getFieldValue('VARIABLE_DECL'));
-      statement_block = statement_block.getNextBlock();
-    }
-
-    const includes = statement_names.join(' ');
-
-    const nextBlock = block.nextConnection &&
-                      block.nextConnection.targetBlock();
-    const nextCode = this.blockToCode(nextBlock);
-
-    code += `include ${includes}\n${nextCode}omit ${includes}\n`;
-    return code;
-  }
 }
 
 /**
@@ -106,12 +83,8 @@ Generator.addReservedWords('theorem,lemma,axiom,axioms,variable,protected,' +
  */
 Generator.scrub_ = function(block, code, optThisOnly) {
   const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-  if (block.type === 'variables' && !optThisOnly && nextBlock) {
-    return this.generate_include_omit_(block, code);
-  } else {
-    const nextCode = optThisOnly ? '' : this.blockToCode(nextBlock);
-    return code + nextCode;
-  }
+  const nextCode = optThisOnly ? '' : this.blockToCode(nextBlock);
+  return code + nextCode;
 };
 
 defineLogic(Generator);

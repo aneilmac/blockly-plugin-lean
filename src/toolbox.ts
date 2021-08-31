@@ -8,10 +8,6 @@ export const LeanTacticsCategory = {
   contents: [
     {
       kind: 'block',
-      type: 'variables',
-    },
-    {
-      kind: 'block',
       type: 'prop_declaration',
     },
     {

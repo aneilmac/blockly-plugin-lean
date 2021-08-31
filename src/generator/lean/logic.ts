@@ -16,23 +16,12 @@ export interface PropositionOverride {
  * @param Generator
  */
 export default function defineLogic(Generator: any) {
-  Generator['variables'] = function(block: Blockly.Block) {
-    let code = 'variables\n';
-    code += Generator.statementToCode(block, 'VARIABLES');
-    code += '\n';
-    return code;
-  };
-  Generator['prop_declaration'] = function(block: Blockly.Block) {
-    const decl = block.getFieldValue('VARIABLE_DECL');
-    const def = block.getFieldValue('VARIABLE_DEF');
-    return `(${decl} : ${def})\n`;
-  };
   Generator['lemma'] = function(block: Blockly.Block) {
     let code = 'lemma ';
-
     const text_theorem_name = block.getFieldValue('THEOREM_NAME');
+    const variables = Generator.statementToCode(block, 'VARIABLES');
     const text_theorem_statement = block.getFieldValue('THEOREM_DECLARATION');
-    code += text_theorem_name + ' : ' + text_theorem_statement;
+    code += text_theorem_name + variables + ' : ' + text_theorem_statement;
     code += ' := \n';
 
     code += 'begin';
@@ -45,8 +34,10 @@ export default function defineLogic(Generator: any) {
     code += 'end\n';
     return code;
   };
-  Generator['tactic_begin'] = function() {
-    return '';
+  Generator['prop_declaration'] = function(block: Blockly.Block) {
+    const decl = block.getFieldValue('VARIABLE_DECL');
+    const def = block.getFieldValue('VARIABLE_DEF');
+    return `(${decl} : ${def})`;
   };
   Generator['tactic_sorry'] = function() {
     return 'sorry,\n';
